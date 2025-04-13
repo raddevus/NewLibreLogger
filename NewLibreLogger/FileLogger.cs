@@ -15,6 +15,7 @@ public class FileLogger: Loggable{
          FileName = filename;
       }
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff tt")} : FileActivityTracker ctor...");
+      Configure();
    }
 
    public override bool Configure(){
