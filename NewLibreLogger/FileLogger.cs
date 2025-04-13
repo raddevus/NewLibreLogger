@@ -4,19 +4,26 @@ namespace NewLibre;
 
 public class FileLogger: Loggable{
    private String Path = @$"Path.Combine({Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}";
-   private String FileName;
-   public FileLogger(string path = null){
-       
+   private String FileName = "file.log";
+   private String TargetFile;
+   
+   public FileLogger(string path = null, string filename = null){
+      if (!path.IsNullOrEmpty()){
+         Path = path;
+      }
+      if (!filename.IsNullOrEmpty()){
+         FileName = filename;
+      }
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff tt")} : FileActivityTracker ctor...");
    }
 
    public override bool Configure(){
-      FileName = @$"Path.Combine({Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)},temp,InterfaceStudy.log";
+      TargetFile = @$"Path.Combine({Path},{FileName}";
       return true;
    }
 
    public override string StorageTarget{
-      get{ return FileName;}
+      get{ return TargetFile;}
    }
 
    public override bool Write(String message){
