@@ -1,8 +1,11 @@
 using System;
+using Microsoft.Data.Sqlite;
 
 namespace NewLibre;
 
 public class SqliteLogger: Loggable{
+   private SqliteCommand Command{get;set;}
+
    private String Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}";
    private String FileName = "nllogger.db";
    private String TargetFile;
