@@ -3,8 +3,10 @@ using System;
 namespace NewLibre;
 
 public class FileLogger: Loggable{
+   private String Path = @$"Path.Combine({Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}";
    private String FileName;
-   public FileLogger(){
+   public FileLogger(string path = null){
+       
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff tt")} : FileActivityTracker ctor...");
    }
 
