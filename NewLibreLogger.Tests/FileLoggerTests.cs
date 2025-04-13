@@ -13,6 +13,7 @@ public class FileLoggerTests{
    [Fact]
    void NoPathNoFile(){
       FileLogger fl = new FileLogger();
+      Console.WriteLine($"Writing to {fl.StorageTarget}");
       fl.Write("This is my test");
    }
 }
