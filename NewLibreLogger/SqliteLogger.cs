@@ -5,7 +5,9 @@ namespace NewLibre;
 
 public class SqliteLogger: Loggable{
    private SqliteCommand Command{get;set;}
-
+   private String connectionString;
+   
+   protected SqliteConnection connection;
    private String Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}";
    private String FileName = "nllogger.db";
    private String TargetFile;
@@ -27,7 +29,7 @@ public class SqliteLogger: Loggable{
    }
 
    public override string StorageTarget{
-      get{ return TargetFile;}
+      get{ return connectionString;}
    }
 
    public override bool Write(String message){
