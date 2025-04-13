@@ -1,10 +1,13 @@
-public abstract class Trackable{
+using System;
+namespace NewLibre;
+
+public abstract class Loggable{
 	
-	public Trackable(){
+	public Loggable(){
 		Configure();
 	}
 	
 	public abstract bool Configure();
-    public abstract bool WriteActivity(String file);
+    public abstract bool Write(String file);
     public abstract string StorageTarget{get;}
 }
