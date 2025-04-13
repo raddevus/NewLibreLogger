@@ -3,7 +3,7 @@ using System;
 namespace NewLibre;
 
 public class FileLogger: Loggable{
-   private String Path = @$"Path.Combine({Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}";
+   private String Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}";
    private String FileName = "file.log";
    private String TargetFile;
    
@@ -18,7 +18,7 @@ public class FileLogger: Loggable{
    }
 
    public override bool Configure(){
-      TargetFile = @$"Path.Combine({Path},{FileName}";
+      TargetFile = @$"{System.IO.Path.Combine(Path,FileName)}";
       return true;
    }
 
