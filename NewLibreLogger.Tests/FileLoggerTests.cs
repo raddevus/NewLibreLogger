@@ -23,4 +23,11 @@ public class FileLoggerTests{
       Console.WriteLine($"Writing to {fl.StorageTarget}");
       fl.Write("This is my test");
    }
+
+   [Fact]
+   void AddFileNoPath(){
+      FileLogger fl = new FileLogger(String.Empty,"newfile.txt");
+      Console.WriteLine($"Writing to {fl.StorageTarget}");
+      fl.Write("This is my test");
+   }
 }
