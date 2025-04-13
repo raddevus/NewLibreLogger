@@ -1,1 +1,18 @@
-UnitTest1.cs
+namespace NewLibreLogger.Tests;
+using NewLibre;
+using System.IO;
+
+public class FileLoggerTests{
+   //Redirect Console output to the terminal
+   TextWriter terminalWriter; 
+   public FileLoggerTests(){
+      terminalWriter = Console.Out;
+      Console.SetOut(terminalWriter);
+   }
+
+   [Fact]
+   void NoPathNoFile(){
+      FileLogger fl = new FileLogger();
+      fl.Write("This is my test");
+   }
+}
