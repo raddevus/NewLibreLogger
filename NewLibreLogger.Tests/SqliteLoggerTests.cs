@@ -6,7 +6,7 @@ public class SqliteLoggerTests{
 
    [Fact]
    void NoPathNoFile(){
-      FileLogger fl = new FileLogger();
+      SqliteLogger fl = new ();
       Console.WriteLine($"Writing to {fl.StorageTarget}");
       fl.Write("This is my test");
    }

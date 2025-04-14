@@ -54,7 +54,7 @@ public class SqliteLogger: Loggable{
          @$"CREATE Table {TableName}
             ( [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
               [Description] NVARCHAR(1000) check(length(Description) <= 1000),
-                 [Created] NVARCHAR(30) default (datetime('now','localtime')) (length(Created) <= 30)
+              [Created] NVARCHAR(30) default (datetime('now','localtime')) check(length(Created) <= 30)
             )";
    }
 
