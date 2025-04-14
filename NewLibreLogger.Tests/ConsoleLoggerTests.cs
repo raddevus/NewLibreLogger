@@ -15,4 +15,10 @@ public class ConsoleLoggerTests{
       ConsoleLogger cl = new();
       cl.WriteMsg("This message is written without date/time info.");
    }
+
+   [Fact]
+   void WriteMsgAsyncTestNoWait(){
+      ConsoleLogger cl = new();
+      Task.Run (() => cl.WriteAsync("I'm writing async now. No stopping!"));
+   }
 }
