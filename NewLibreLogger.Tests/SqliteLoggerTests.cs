@@ -31,4 +31,11 @@ public class SqliteLoggerTests{
       Console.WriteLine($"Writing to {fl.StorageTarget}");
       fl.Write("This is my test");
    }
+
+   [Fact]
+   void WriteAsyncTest(){
+      SqliteLogger sl = new(null,null,"logtask");
+      Console.WriteLine("Writing test via ASYNC!");
+      Task.Run(() => sl.WriteAsync("Writing with no Blocking."));
+   }
 }
