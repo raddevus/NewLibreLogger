@@ -22,6 +22,18 @@ public class ConsoleLogger: Loggable{
       }
    }
 
+   public async Task WriteAsync(String message){
+      await Task.Run(() =>{
+         try{
+             Console.WriteLine($"{DateTime.Now.ToLongTimeString()} : {message} {Environment.NewLine}");
+             return true;
+         }
+         catch(Exception ex){
+            return false;
+         }
+      });
+   }
+
    // Only writes the user's message - no date/time info
    public bool WriteMsg(String message){
       try{
