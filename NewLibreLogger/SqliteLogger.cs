@@ -86,5 +86,24 @@ public class SqliteLogger: Loggable{
          return false;
       }
    }
+   
+   public async Task WriteAsync(String message){
+      Task.Run(() => {
+         Command.CommandText = @$"INSERT into {TableName} (Description)values($message);select * from task where id =(SELECT last_insert_rowid())";
+         Command.Parameters.AddWithValue("$message",message);
+         try{
+             Console.WriteLine("Saving...");
+               connection.Open();
+               Console.WriteLine("Opened.");
+               // id should be last id inserted into table
+               var id = Convert.ToInt64(Command.ExecuteScalar());
+               Console.WriteLine("inserted.");
+             return true;
+         }
+         catch(Exception ex){
+            return false;
+         }
+      });
+   }
 }
 
