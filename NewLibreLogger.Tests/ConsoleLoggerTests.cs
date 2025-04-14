@@ -17,8 +17,14 @@ public class ConsoleLoggerTests{
    }
 
    [Fact]
-   void WriteMsgAsyncTestNoWait(){
+   void WriteMsgAsyncNoWaitTest(){
       ConsoleLogger cl = new();
       Task.Run (() => cl.WriteAsync("I'm writing async now. No stopping!"));
+   }
+
+   [Fact] 
+   async void WriteMsgAsyncBlockTest(){
+      ConsoleLogger cl = new();
+      await cl.WriteAsync("I'm writing async with BLOCKing!");
    }
 }
