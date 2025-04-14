@@ -22,6 +22,17 @@ public class ConsoleLogger: Loggable{
       }
    }
 
+   // Only writes the user's message - no date/time info
+   public bool WriteMsg(String message){
+      try{
+         Console.WriteLine($"{message}");
+         return true;
+      }
+      catch (Exception ex){
+         return false;
+      }
+   }
+
    public override bool Configure(){
       // no op function -- nothing needed for console
       return true;

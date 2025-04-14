@@ -5,8 +5,14 @@ using System.IO;
 public class ConsoleLoggerTests{
 
    [Fact]
-   void WriteMsgTest(){
+   void WriteMsgWithTimeTest(){
       ConsoleLogger cl = new();
       cl.Write("This is the console test.");
+   }
+
+   [Fact]
+   void WriteMsgWithoutTime(){
+      ConsoleLogger cl = new();
+      cl.WriteMsg("This message is written without date/time info.");
    }
 }
