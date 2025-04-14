@@ -71,8 +71,15 @@ public class SqliteLogger: Loggable{
    }
 
    public override bool Write(String message){
+      Command.CommandText = @"INSERT into Task (Description)values($message);select * from task where id =(SELECT last_insert_rowid())";
+      Command.Parameters.AddWithValue("$message",message);
       try{
-          File.AppendAllText(StorageTarget, $"{DateTime.Now.ToLongTimeString()}:   {message} {Environment.NewLine}");
+          Console.WriteLine("Saving...");
+            connection.Open();
+            Console.WriteLine("Opened.");
+            // id should be last id inserted into table
+            var id = Convert.ToInt64(Command.ExecuteScalar());
+            Console.WriteLine("inserted.");
           return true;
       }
       catch(Exception ex){
