@@ -10,21 +10,57 @@ public class SqliteLogger: Loggable{
    protected SqliteConnection connection;
    private String Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}";
    private String FileName = "nllogger.db";
+   private String TableName = "task";
    private String TargetFile;
    
-   public SqliteLogger(string path = null, string filename = null){
+   public SqliteLogger(string path = null, string filename = null, 
+         string tableName = null){
       if (!path.IsNullOrEmpty()){
          Path = path;
       }
       if (!filename.IsNullOrEmpty()){
          FileName = filename;
       }
+      if (!tableName.IsNullOrEmpty()){
+         TableName = tableName;
+      }
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff tt")} : FileActivityTracker ctor...");
       Configure();
+      InitializeTableCreate();
+      
+      try{
+         connection.Open();
+         FileInfo fi = new(TargetFile);
+         if (fi.Length == 0){
+            foreach (String tableCreate in allTableCreation){
+               Command.CommandText = tableCreate;
+               Command.ExecuteNonQuery();
+            }
+         }
+         Console.WriteLine(connection.DataSource);
+      }
+      finally{
+         if (connection != null){
+            connection.Close();
+         }
+      }
+   }
+   
+   protected String [] allTableCreation = new string[1];
+   void InitializeTableCreate(){
+      allTableCreation[0] =  
+         @$"CREATE Table {TableName}
+            ( [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+              [Description] NVARCHAR(1000) check(length(Description) <= 1000),
+                 [Created] NVARCHAR(30) default (datetime('now','localtime')) (length(Created) <= 30)
+            )";
    }
 
    public override bool Configure(){
       TargetFile = @$"{System.IO.Path.Combine(Path,FileName)}";
+      connectionString = $"Data Source={TargetFile}";
+      connection = new SqliteConnection(connectionString);
+      Command = connection.CreateCommand();
       return true;
    }
 
