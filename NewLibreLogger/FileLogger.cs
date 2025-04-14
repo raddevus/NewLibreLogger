@@ -36,5 +36,17 @@ public class FileLogger: Loggable{
          return false;
       }
    }
+   
+   public async Task WriteAsync(String message){
+      Task.Run(() => {
+         try{
+             File.AppendAllText(StorageTarget, $"{DateTime.Now.ToLongTimeString()}:   {message} {Environment.NewLine}");
+             return true;
+         }
+         catch(Exception ex){
+            return false;
+         }
+      });
+   }
 }
 
