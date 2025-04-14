@@ -45,7 +45,9 @@ public class SqliteLogger: Loggable{
          }
       }
    }
-   
+  
+   // Make sure you set the size of this array so it is
+   // large enough to match the number of tables you create.
    protected String [] allTableCreation = new string[1];
    void InitializeTableCreate(){
       allTableCreation[0] =  
