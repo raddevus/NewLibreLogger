@@ -3,12 +3,6 @@ using NewLibre;
 using System.IO;
 
 public class FileLoggerTests{
-   //Redirect Console output to the terminal
-   TextWriter terminalWriter; 
-   public FileLoggerTests(){
-      terminalWriter = Console.Out;
-      Console.SetOut(terminalWriter);
-   }
 
    [Fact]
    void NoPathNoFile(){
