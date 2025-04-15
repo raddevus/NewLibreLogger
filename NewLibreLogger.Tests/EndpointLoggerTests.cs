@@ -17,9 +17,12 @@ public class EndpointLoggerTests{
    }
 
    [Fact]
-   void WriteMsgAsyncNoWaitTest(){
-      ConsoleLogger cl = new();
-      Task.Run (() => cl.WriteAsync("I'm writing async now. No stopping!"));
+   public async Task WriteMsgAsyncNoWaitTest(){
+      EndpointLogger el = new("http://localhost:5243/data/getalltokens?pwd=ThisIsAnExtr3m3lyLongCod3");
+      string result = await el.WriteAsync("{\"key\":\"value\"}");
+Console.WriteLine(result);
+
+//      Task.Run (() => cl.WriteAsync("I'm writing async now. No stopping!"));
    }
 
    [Fact] 
