@@ -1,17 +1,19 @@
 using System;
+using System.Text;
+using System.Text.Json;
 using System.Net.Http;
 
 namespace NewLibre;
 
 public class EndpointLogger: Loggable{
    private String Endpoint;
-   private readonly HttpClient HttpClient;
+   private readonly HttpClient _httpClient;
    
    public EndpointLogger(String endpoint){
       if (!endpoint.IsNullOrEmpty()){
          Endpoint = endpoint;
       }
-      HttpClient = new HttpClient();
+      _httpClient = new HttpClient();
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff tt")} : EndpointLogger ctor...");
       Configure();
    }
@@ -28,16 +30,9 @@ public class EndpointLogger: Loggable{
       return true;
    }
    
-   public async Task WriteAsync(String message){
-      Task.Run(() => {
-         try{
-             File.AppendAllText(StorageTarget, $"{DateTime.Now.ToLongTimeString()}:   {message} {Environment.NewLine}");
-             return true;
-         }
-         catch(Exception ex){
-            return false;
-         }
-      });
+   public async Task<string> WriteAsync(String message){
+      var content = new StringContent(JsonSerializer.Serialize(message), Encoding.UTF8, "application/json");
+        var response = await _httpClient.PostAsync(Endpoint, content);
+        return await response.Content.ReadAsStringAsync();
    }
 }
-
