@@ -11,6 +11,7 @@ public class EndpointLogger: Loggable{
       if (!endpoint.IsNullOrEmpty()){
          Endpoint = endpoint;
       }
+      HttpClient = new HttpClient();
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff tt")} : EndpointLogger ctor...");
       Configure();
    }
