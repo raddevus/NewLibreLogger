@@ -18,8 +18,9 @@ public class EndpointLoggerTests{
 
    [Fact]
    public async Task WriteMsgAsyncNoWaitTest(){
-      EndpointLogger el = new("http://localhost:5243/data/getalltokens?pwd=ThisIsAnExtr3m3lyLongCod3");
-      string result = await el.WriteAsync("{\"key\":\"value\"}");
+      EndpointLogger el = new("http://localhost:5247/RegisterUser3");
+      Console.WriteLine("before call to endpointlogger...");
+      string result = await el.WriteAsync("{\"uuid\":\"thisIsId\"}");
 Console.WriteLine(result);
 
 //      Task.Run (() => cl.WriteAsync("I'm writing async now. No stopping!"));

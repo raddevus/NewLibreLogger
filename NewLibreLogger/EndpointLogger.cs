@@ -31,8 +31,15 @@ public class EndpointLogger: Loggable{
    }
    
    public async Task<string> WriteAsync(String message){
+      Console.WriteLine("In WriteAsync...");
+      try{
       var content = new StringContent(JsonSerializer.Serialize(message), Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync(Endpoint, content);
         return await response.Content.ReadAsStringAsync();
+      }
+      catch (Exception ex){
+         Console.WriteLine($"Error: {ex.Message}");
+         return "error";
+      }
    }
 }
